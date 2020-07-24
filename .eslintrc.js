@@ -3,8 +3,8 @@ module.exports = {
     node: true,
     commonjs: true,
     es6: true,
+    mocha: true,
   },
-  extends: ['airbnb-base'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -15,6 +15,15 @@ module.exports = {
   },
   parser: 'babel-eslint',
   rules: {
-    'no-underscore-dangle':0
+    'no-underscore-dangle': 0,
   },
+  overrides: [
+    {
+      files: ['*.test.js', '*.spec.js'],
+      rules: {
+        'no-unused-expressions': 'off',
+      },
+    },
+  ],
+  extends: ['airbnb-base', 'prettier'],
 };

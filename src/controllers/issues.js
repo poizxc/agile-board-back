@@ -3,7 +3,6 @@ const Joi = require('@hapi/joi');
 const asyncRoute = require('../middlewares/asyncRoute');
 const Issue = require('../models/Issue');
 const validator = require('../middlewares/requestValidator');
-const { regexPatterns } = require('../config/constants');
 const { errors } = require('../helpers/Errors');
 const { issuesStatues, regexPatterns } = require('../config/constants');
 

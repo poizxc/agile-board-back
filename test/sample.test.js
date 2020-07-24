@@ -1,4 +1,3 @@
-const mocha = require('mocha');
 const { expect } = require('chai');
 
 describe('sample tests', () => {
