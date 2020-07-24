@@ -9,8 +9,8 @@ const errorHandler = require('./middlewares/errorHandler');
 const config = require('./config/config');
 const controllers = require('./controllers');
 const logger = require('./helpers/logger');
-
-// Our Express APP config
+const db = require('./providers/db');
+// Express APP config
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,8 +37,11 @@ controllers.init(app);
 // error handler
 app.use(errorHandler);
 
-const server = app.listen(config.port, () => {
-  logger.info(`App is running on http://localhost:${config.port} `);
-});
-
-module.exports = server;
+db.authenticate()
+  .then(() => {
+    const server = app.listen(config.port, () => {
+      logger.info(`App is running on http://localhost:${config.port} `);
+    });
+    module.exports = server;
+  })
+  .catch(() => logger.error('cannot establish connection to database'));
