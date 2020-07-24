@@ -1,5 +1,4 @@
 const Sequalize = require('sequelize');
-const logger = require('../helpers/logger');
 
 const sequelize = new Sequalize(
   process.env.PG_DB,
