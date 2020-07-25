@@ -17,6 +17,7 @@ class StatusError extends Error {
     return this._userMessage;
   }
 }
+
 const errors = {
   badRequest: (message = 'Bad Request') => new StatusError(400, message),
   unauthorized: (message = 'unauthorized') => new StatusError(401, message),

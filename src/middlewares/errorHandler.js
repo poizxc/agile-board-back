@@ -9,6 +9,7 @@ module.exports = (err, req, res, next) => {
       message: `Occurred on ${req.method} ${req.originalUrl}`,
     });
   }
+
   if (err instanceof StatusError) {
     res.status(err.statusCode).send(err.userMessage);
   } else {

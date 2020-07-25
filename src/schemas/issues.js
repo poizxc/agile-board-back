@@ -11,6 +11,7 @@ const issuePostSchema = {
     estimate: Joi.number().required(),
   },
 };
+
 const issuePutSchema = {
   body: {
     title: Joi.string().required(),
@@ -24,6 +25,7 @@ const issuePutSchema = {
     uuid: Joi.string().uuid().required(),
   },
 };
+
 const issuePatchSchema = {
   body: {
     status: Joi.string()
@@ -40,6 +42,7 @@ const issueDeleteSchema = {
     uuid: Joi.string().uuid().required(),
   },
 };
+
 module.exports = {
   issuePostSchema,
   issuePutSchema,
