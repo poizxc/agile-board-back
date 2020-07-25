@@ -1,5 +1,4 @@
-const issueCantBeUpdated = (previousStatus, nextStatus) => {
-  console.log({ previousStatus, nextStatus });
+const checkIfIssueCantBeUpdated = (previousStatus, nextStatus) => {
   // todo extract logic here
   if (nextStatus === previousStatus) {
     return true;
@@ -14,5 +13,5 @@ const issueCantBeUpdated = (previousStatus, nextStatus) => {
 };
 
 module.exports = {
-  issueCantBeUpdated,
+  checkIfIssueCantBeUpdated,
 };

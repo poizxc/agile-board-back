@@ -1,14 +1,17 @@
 const { Router } = require('express');
-const Joi = require('@hapi/joi');
 const asyncRoute = require('../middlewares/asyncRoute');
 const Issue = require('../models/Issue');
 const validator = require('../middlewares/requestValidator');
 const { errors } = require('../helpers/Errors');
-const { issuesStatues, regexPatterns } = require('../config/constants');
+const { regexPatterns } = require('../config/constants');
+const {
+  issuePostSchema,
+  issuePutSchema,
+  issuePatchSchema,
+  issueDeleteSchema,
+} = require('../schemas/issues');
 
 const IssueRouter = new Router();
-
-// todo move joi schemas to external files
 
 IssueRouter.get(
   '/',
@@ -26,77 +29,45 @@ IssueRouter.get(
 
 IssueRouter.post(
   '/',
-  validator({
-    body: {
-      title: Joi.string().required(),
-      description: Joi.string().required(),
-      status: Joi.string()
-        .valid(...issuesStatues)
-        .required(),
-      estimate: Joi.number().required(),
-    },
-  }),
-  asyncRoute(async (req, res) => res.send(await Issue.create(req.body))),
+  validator(issuePostSchema),
+  asyncRoute(async (req, res) =>
+    res.status(201).send(await Issue.create(req.body)),
+  ),
 );
 
 IssueRouter.put(
   `/:uuid(${regexPatterns.uuid})`,
-  validator({
-    body: {
-      title: Joi.string().required(),
-      description: Joi.string().required(),
-      status: Joi.string()
-        .valid(...issuesStatues)
-        .required(),
-      estimate: Joi.number().required(),
-    },
-    params: {
-      uuid: Joi.string().uuid().required(),
-    },
-  }),
+  validator(issuePutSchema),
   asyncRoute(async (req, res) => {
     const result = await Issue.update(req.body, {
       where: { uuid: req.params.uuid },
     });
     const isUpdated = result[0] === 1;
-    return isUpdated ? res.status(200).send('updated') : res.sendStatus(404);
+    return isUpdated ? res.send('updated') : res.sendStatus(404);
   }),
 );
 
 IssueRouter.patch(
   `/:uuid(${regexPatterns.uuid})`,
-  validator({
-    body: {
-      status: Joi.string()
-        .valid(...issuesStatues)
-        .required(),
-    },
-    params: {
-      uuid: Joi.string().uuid().required(),
-    },
-  }),
+  validator(issuePatchSchema),
   asyncRoute(async (req, res) => {
     const result = await Issue.update(req.body, {
       where: { uuid: req.params.uuid },
     });
     const isUpdated = result[0] === 1;
-    return isUpdated ? res.status(200).send('updated') : res.sendStatus(404);
+    return isUpdated ? res.send('updated') : res.sendStatus(404);
   }),
 );
 
 IssueRouter.delete(
   `/:uuid(${regexPatterns.uuid})`,
-  validator({
-    params: {
-      uuid: Joi.string().uuid().required(),
-    },
-  }),
+  validator(issueDeleteSchema),
   asyncRoute(async (req, res) => {
     const result = await Issue.destroy({
       where: { uuid: req.params.uuid },
       force: true,
     });
-    return result ? res.status(200).send('deleted') : res.sendStatus(404);
+    return result ? res.send('deleted') : res.sendStatus(404);
   }),
 );
 module.exports = IssueRouter;

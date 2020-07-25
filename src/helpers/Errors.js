@@ -24,5 +24,5 @@ const errors = {
   notFound: (message = 'Not Found') => new StatusError(404, message),
   conflict: (message = 'Conflict') => new StatusError(409, message),
 };
+
 module.exports = { StatusError, errors };
-// TODO add more common situations
