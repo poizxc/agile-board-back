@@ -27,6 +27,7 @@ const Issue = db.define(
     },
 
     estimate: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
   },
@@ -34,13 +35,19 @@ const Issue = db.define(
     hooks: {
       beforeBulkUpdate: async (nextIssue) => {
         if (nextIssue.where.uuid) {
-          const {
-            dataValues: { status },
-          } = await Issue.findByPk(nextIssue.where.uuid);
-          if (checkIfIssueCantBeUpdated(status, nextIssue.attributes.status)) {
+          const result = await Issue.findByPk(nextIssue.where.uuid);
+          if (!result) {
+            return Promise.reject(errors.notFound(`issue not exist`));
+          }
+          if (
+            checkIfIssueCantBeUpdated(
+              result.dataValues.status,
+              nextIssue.attributes.status,
+            )
+          ) {
             return Promise.reject(
               errors.badRequest(
-                `status: ${status}  can't be changed to ${nextIssue.attributes.status}`,
+                `status: ${result.dataValues.status}  can't be changed to ${nextIssue.attributes.status}`,
               ),
             );
           }
@@ -66,6 +73,18 @@ Issue.sync({ force: true })
       description: 'testDESC1',
       status: 'CLOSED',
       estimate: 5,
+    });
+    Issue.create({
+      title: 'test2',
+      description: 'testDESC2',
+      status: 'PENDING',
+      estimate: 3,
+    });
+    Issue.create({
+      title: 'test3',
+      description: 'testDESC3',
+      status: 'TODO',
+      estimate: 2,
     });
     logger.info('table issues created');
   })
