@@ -6,7 +6,7 @@ const {
 
 const sequelize = new Sequalize(database, user, password, {
   host,
-  port: port,
+  port,
   dialect: 'postgres',
   logging: isDev,
   dialectOptions: {

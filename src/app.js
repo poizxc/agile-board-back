@@ -6,41 +6,31 @@ const reqID = require('./middlewares/reqID');
 const requestLogger = require('./middlewares/requestLogger');
 const reqTime = require('./middlewares/reqTime');
 const errorHandler = require('./middlewares/errorHandler');
-const config = require('./config/config');
+const { isDev, port } = require('./config/config');
 const controllers = require('./controllers');
 const logger = require('./helpers/logger');
 const db = require('./providers/db');
+const disableCors = require('./middlewares/disableCors');
 // Express APP config
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// middlewares
+// custom middlewares
 app.use(reqID, reqTime, requestLogger);
-
-// cors off in dev
-if (config.isDev) {
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept',
-    );
-    next();
-  });
+if (isDev) {
+  app.use(disableCors);
 }
 
 // API Endpoints
 controllers.init(app);
 
-// error handler
 app.use(errorHandler);
 
 db.authenticate()
   .then(() => {
-    const server = app.listen(config.port, () => {
-      logger.info(`App is running on http://localhost:${config.port} `);
+    const server = app.listen(port, () => {
+      logger.info(`App is running on http://localhost:${port} `);
     });
     module.exports = server;
   })
