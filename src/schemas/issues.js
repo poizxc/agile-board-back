@@ -8,7 +8,7 @@ const issuePostSchema = {
     status: Joi.string()
       .valid(...issuesStatues)
       .required(),
-    estimate: Joi.number().required(),
+    estimate: Joi.number().min(0).required(),
   },
 };
 
@@ -19,7 +19,7 @@ const issuePutSchema = {
     status: Joi.string()
       .valid(...issuesStatues)
       .required(),
-    estimate: Joi.number().required(),
+    estimate: Joi.number().min(0).required(),
   },
   params: {
     uuid: Joi.string().uuid().required(),

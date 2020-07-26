@@ -1,12 +1,8 @@
 const checkIfIssueCantBeUpdated = (previousStatus, nextStatus) => {
-  // todo extract logic here
-  if (nextStatus === previousStatus) {
+  if (previousStatus === 'PENDING' && nextStatus === 'TODO') {
     return true;
   }
-  if (previousStatus === 'PENDING' && nextStatus !== 'CLOSED') {
-    return true;
-  }
-  if (previousStatus === 'CLOSED') {
+  if (previousStatus === 'CLOSED' && nextStatus !== 'CLOSED') {
     return true;
   }
   return false;

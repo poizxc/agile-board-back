@@ -18,14 +18,14 @@ const Issue = db.define(
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     status: {
       type: DataTypes.STRING,
       allowNull: false,
       isIn: constants.issuesStatues,
     },
-
     estimate: {
       allowNull: false,
       type: DataTypes.INTEGER,
@@ -63,28 +63,47 @@ Issue.sync({ force: true })
   .then(() => {
     Issue.create({
       uuid: '2389f56b-bed3-47d6-b0f2-277a7fb7b8c0',
-      title: 'test',
-      description: 'testDESC',
+      title: 'HODOR IPSUM',
+      description: ` HODOR HODOR! Hodor? Hodor, hodor. Hodor. hodor\
+        HODOR! Hodor. Hodor`,
       status: 'TODO',
       estimate: 1,
     });
     Issue.create({
-      title: 'test1',
-      description: 'testDESC1',
+      title: 'BACON IPSUM',
+      description: `Bacon ipsum dolor amet flank pork loin brisket\
+        burgdoggen meatball sausage jerky buffalo. `,
       status: 'CLOSED',
       estimate: 5,
     });
     Issue.create({
-      title: 'test2',
-      description: 'testDESC2',
+      title: 'OFFICE IPSUM',
+      description: `This is our north star design. I dont care if you got some copy,\
+        why you dont use officeipsum com or something like that ?. `,
       status: 'PENDING',
       estimate: 3,
     });
     Issue.create({
-      title: 'test3',
-      description: 'testDESC3',
+      title: 'CAT IPSUM',
+      description: `Cat cat moo moo lick ears lick paws chew foot head nudges .\
+       Intently stare at the same spot murr i hate humans they are so annoying \
+       let me in let me out`,
       status: 'TODO',
       estimate: 2,
+    });
+    Issue.create({
+      title: 'CUPCAKE IPSUM',
+      description: `Wafer cheesecake oat cake cupcake pudding. Chocolate bar \
+      jelly-o chocolate bar dragée. Jelly cookie marzipan bonbon sweet.`,
+      status: 'PENDING',
+      estimate: 2,
+    });
+    Issue.create({
+      title: 'ZOMBIE IPSUM',
+      description: `Zombie ipsum brains reversus ab cerebellum viral inferno, \
+      brein nam rick mend grimes .`,
+      status: 'TODO',
+      estimate: 8,
     });
     logger.info('table issues created');
   })
