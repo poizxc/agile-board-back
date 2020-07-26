@@ -7,20 +7,22 @@ This is an Api for Agile-Board Recruitment task written in Express
 **If u are reviewer check [Notes For Reviewers](#notes-for-reviewers)**
 
 ## Table Of Contents
+
 **[Agile-Board-Back](#agile-board-back)**
-  - [Prerequisites](#prerequisites)
-  - [Installing](#installing)
-  - [Running Application in development mode](#running-application-in-development-mode)
-  - [Running Application in production mode](#running-application-in-production-mode)
-  - [Running Tests](#running-tests)
-  - **[Notes For Reviewers](#notes-for-reviewers)**
-    - **[Tech Stack](#tech-stack)**
-      - [Framework](#framework)
-      - [Database](#database)
-      - [Type Checking](#type-checking)
-      - [Validation](#validation)
-      - [Errors handling](#errors-handling)
-      - [Logging](#logging)
+
+- [Prerequisites](#prerequisites)
+- [Installing](#installing)
+- [Running Application in development mode](#running-application-in-development-mode)
+- [Running Application in production mode](#running-application-in-production-mode)
+- [Running Tests](#running-tests)
+- **[Notes For Reviewers](#notes-for-reviewers)**
+  - **[Tech Stack](#tech-stack)**
+    - [Framework](#framework)
+    - [Database](#database)
+    - [Type Checking](#type-checking)
+    - [Validation](#validation)
+    - [Errors handling](#errors-handling)
+    - [Logging](#logging)
 
 ## Prerequisites
 
@@ -67,13 +69,13 @@ Application started in production mode will log less sentences to console, and i
 To start production server you need to type :
 
 ```
-yarn start:prod
+yarn start
 ```
 
 or
 
 ```
-npm run start:prod
+npm run start
 ```
 
 ## Running Tests
