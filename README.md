@@ -2,7 +2,7 @@
 
 ![Working Api](api.png)
 
-This is an Api for Agile-Board Recruitment task written in Express
+This is an Api for Agile-Board Recruitment task, written in Express.
 
 **If u are reviewer check [Notes For Reviewers](#notes-for-reviewers)**
 
@@ -34,7 +34,7 @@ This is an Api for Agile-Board Recruitment task written in Express
 
 ## Installing
 
-To install **Agile-Board-Back** use **Yarn** or **NPM**
+To install **Agile-Board-Back** use **Yarn** or **NPM**.
 
 ```
 npm install
@@ -94,9 +94,9 @@ npm run test
 
 ## Notes For Reviewers
 
-I created one endpoint to reset database because I hosted this application and it is publicly available, so I cannot ensure that nobody won't change it. Please do not take into account code written there.
+I created one endpoint to reset database, because I hosted this application and it is publicly available I cannot ensure that nobody won't change it. Please do not take into account code written there.
 
-In agile-board.postman_collection.json You can find postman collection that can be imported into postman ;)
+In agile-board.postman_collection.json you can find postman collection that can be imported into postman ;)
 
 ### Tech Stack
 
