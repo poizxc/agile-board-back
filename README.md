@@ -25,6 +25,7 @@ This is an Api for Agile-Board Recruitment task written in Express
 ## Prerequisites
 
 - **Node**
+- **npm** / **yarn**
 - **postgresql**
 
 ## Installing
