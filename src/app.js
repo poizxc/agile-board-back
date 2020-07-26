@@ -6,21 +6,18 @@ const reqID = require('./middlewares/reqID');
 const requestLogger = require('./middlewares/requestLogger');
 const reqTime = require('./middlewares/reqTime');
 const errorHandler = require('./middlewares/errorHandler');
-const { isDev, port } = require('./config/config');
+const { port } = require('./config/config');
 const controllers = require('./controllers');
 const logger = require('./helpers/logger');
 const db = require('./providers/db');
-const disableCors = require('./middlewares/disableCors');
+const cors = require('./middlewares/cors');
 // Express APP config
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // custom middlewares
-app.use(reqID, reqTime, requestLogger);
-if (isDev) {
-  app.use(disableCors);
-}
+app.use(cors, reqID, reqTime, requestLogger);
 
 // API Endpoints
 controllers.init(app);

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const constants = require('../config/constants');
-const { checkIfIssueCantBeUpdated } = require('../utils');
+const { checkIfIssueCanBeUpdated } = require('../utils');
 const { errors } = require('../helpers/Errors');
 const { isDev } = require('../config/config');
 const populateWithDummyData = require('../helpers/dummyData');
@@ -41,7 +41,7 @@ const Issue = (db) => {
               return Promise.reject(errors.notFound(`issue not exist`));
             }
             if (
-              checkIfIssueCantBeUpdated(
+              !checkIfIssueCanBeUpdated(
                 result.dataValues.status,
                 nextIssue.attributes.status,
               )
