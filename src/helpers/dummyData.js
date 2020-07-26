@@ -34,7 +34,7 @@ const populateWithDummyData = async (issue) => {
     await issue.create({
       title: 'CUPCAKE IPSUM',
       description: `Wafer cheesecake oat cake cupcake pudding. Chocolate bar \
-          jelly-o chocolate bar dragée. Jelly cookie marzipan bonbon sweet.`,
+      jelly-o chocolate bar dragée. Jelly cookie marzipan bonbon sweet.`,
       status: 'PENDING',
       estimate: 2,
     });

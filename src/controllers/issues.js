@@ -10,6 +10,7 @@ const {
   issuePatchSchema,
   issueDeleteSchema,
 } = require('../schemas/issues');
+const populateWithDummyData = require('../helpers/dummyData');
 
 const IssueRouter = new Router();
 
@@ -65,9 +66,21 @@ IssueRouter.delete(
   asyncRoute(async (req, res) => {
     const result = await models.issue.destroy({
       where: { uuid: req.params.uuid },
-      force: true,
     });
     return result ? res.send('deleted') : res.sendStatus(404);
+  }),
+);
+
+// this is here only because i hosted this app, check README for more info
+IssueRouter.delete(
+  '/_/reset-db',
+  asyncRoute(async (req, res) => {
+    await models.issue.destroy({
+      where: {},
+      truncate: true,
+    });
+    await populateWithDummyData(models.issue);
+    res.sendStatus(200);
   }),
 );
 module.exports = IssueRouter;
