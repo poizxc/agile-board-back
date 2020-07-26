@@ -10,19 +10,21 @@ This is an Api for Agile-Board Recruitment task written in Express
 
 **[Agile-Board-Back](#agile-board-back)**
 
-- [Prerequisites](#prerequisites)
-- [Installing](#installing)
-- [Running Application in development mode](#running-application-in-development-mode)
-- [Running Application in production mode](#running-application-in-production-mode)
-- [Running Tests](#running-tests)
-- **[Notes For Reviewers](#notes-for-reviewers)**
-  - **[Tech Stack](#tech-stack)**
-    - [Framework](#framework)
-    - [Database](#database)
-    - [Type Checking](#type-checking)
-    - [Validation](#validation)
-    - [Errors handling](#errors-handling)
-    - [Logging](#logging)
+- [Agile-Board-Back](#agile-board-back)
+  - [Table Of Contents](#table-of-contents)
+  - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+  - [Running Application in development mode](#running-application-in-development-mode)
+  - [Running Application in production mode](#running-application-in-production-mode)
+  - [Running Tests](#running-tests)
+  - [Notes For Reviewers](#notes-for-reviewers)
+    - [Tech Stack](#tech-stack)
+      - [Framework](#framework)
+      - [Database](#database)
+      - [Type Checking](#type-checking)
+      - [Validation](#validation)
+      - [Errors handling](#errors-handling)
+      - [Logging](#logging)
 
 ## Prerequisites
 
@@ -44,11 +46,9 @@ yarn install
 
 ## Running Application in development mode
 
-Application started in development mode will log more sentences to console,
-also it will provide system notifications each time you reach error handler middleware
+Application started in development mode will log more sentences to console, it will also provide system notifications each time you reach error handler middleware.
 
-To run application you need to provide database credentials
-check .env.example for environment variable names
+To run application you need to provide database credentials check .env.example for environment variable names.
 
 To start development server you need to type :
 
@@ -64,7 +64,7 @@ npm run start:dev
 
 ## Running Application in production mode
 
-Application started in production mode will log less sentences to console, and it will be free of system notifications
+Application started in production mode will log less sentences to console, and it will be free of system notifications.
 
 To start production server you need to type :
 
@@ -94,9 +94,9 @@ npm run test
 
 ## Notes For Reviewers
 
-I created one endpoint to reset database because I hosted this application and it is publicly available, so i decided someone can mess with it. Please do not take into account code written there when You will review this app.
+I created one endpoint to reset database because I hosted this application and it is publicly available, so I cannot ensure that nobody won't change it. Please do not take into account code written there.
 
-In agile-board.postman_collection.json You can find postman collection that can be imported to postman ;)
+In agile-board.postman_collection.json You can find postman collection that can be imported into postman ;)
 
 ### Tech Stack
 
@@ -123,6 +123,6 @@ Error handler is simply checking if error is instance of **StatusError** and if 
 
 #### Logging
 
-Just to have some control on api calls I prepared logging middleware that is logging some data that i find useful :)
+Just to have some control on api calls I prepared logging middleware that is logging some data that I find useful :)
 
 [Back to top](#Agile-Board-Back)
