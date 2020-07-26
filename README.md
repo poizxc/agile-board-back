@@ -21,7 +21,6 @@ This is an Api for Agile-Board Recruitment task, written in Express.
     - [Tech Stack](#tech-stack)
       - [Framework](#framework)
       - [Database](#database)
-      - [Type Checking](#type-checking)
       - [Validation](#validation)
       - [Errors handling](#errors-handling)
       - [Logging](#logging)
@@ -108,9 +107,6 @@ I Decided to use **Express** for this application. I build it with my custom boi
 
 As database I used **postgres**. I decided to use **ORM** just to make some things easier(auto DB tables drop for example) , so I ended up using **sequalize**.
 
-#### Type Checking
-
-I didn't used any static type checking solutions such as **typescript** I decided that it will overcomplicate things.
 
 #### Validation
 
@@ -119,7 +115,7 @@ To decide if request is valid I used my custom middleware based on **Joi** libra
 #### Errors handling
 
 To make logic easier to write I created StatusError Class and factory functions that returns common errors.
-Error handler is simply checking if error is instance of **StatusError** and if it is it response to request with status **code** and **body**. Handler also contains logic to notify me via **system notifications** if there was error in app.
+Error handler is simply checking if error is instance of **StatusError** and if it is it response to request with provided status **code** and **body**. Handler also contains logic to notify me via **system notifications** if there was error in the app.
 
 #### Logging
 
