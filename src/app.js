@@ -28,7 +28,7 @@ controllers.init(app);
 app.use(errorHandler);
 
 db.authenticate()
-  .then(() => {
+  .then(async () => {
     const server = app.listen(port, () => {
       logger.info(`App is running on http://localhost:${port} `);
     });

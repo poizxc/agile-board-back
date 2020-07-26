@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const asyncRoute = require('../middlewares/asyncRoute');
-const Issue = require('../models/Issue');
+const { models } = require('../providers/db');
 const validator = require('../middlewares/requestValidator');
 const { errors } = require('../helpers/Errors');
 const { regexPatterns } = require('../config/constants');
@@ -15,13 +15,13 @@ const IssueRouter = new Router();
 
 IssueRouter.get(
   '/',
-  asyncRoute(async (req, res) => res.send(await Issue.findAll())),
+  asyncRoute(async (req, res) => res.send(await models.issue.findAll())),
 );
 
 IssueRouter.get(
   `/:uuid(${regexPatterns.uuid})`,
   asyncRoute(async (req, res) => {
-    const issue = await Issue.findByPk(req.params.uuid);
+    const issue = await models.issue.findByPk(req.params.uuid);
     if (!issue) throw errors.notFound();
     return res.send(issue);
   }),
@@ -31,7 +31,7 @@ IssueRouter.post(
   '/',
   validator(issuePostSchema),
   asyncRoute(async (req, res) =>
-    res.status(201).send(await Issue.create(req.body)),
+    res.status(201).send(await models.issue.create(req.body)),
   ),
 );
 
@@ -39,7 +39,7 @@ IssueRouter.put(
   `/:uuid(${regexPatterns.uuid})`,
   validator(issuePutSchema),
   asyncRoute(async (req, res) => {
-    const result = await Issue.update(req.body, {
+    const result = await models.issue.update(req.body, {
       where: { uuid: req.params.uuid },
     });
     const isUpdated = result[0] === 1;
@@ -51,7 +51,7 @@ IssueRouter.patch(
   `/:uuid(${regexPatterns.uuid})`,
   validator(issuePatchSchema),
   asyncRoute(async (req, res) => {
-    const result = await Issue.update(req.body, {
+    const result = await models.issue.update(req.body, {
       where: { uuid: req.params.uuid },
     });
     const isUpdated = result[0] === 1;
@@ -63,7 +63,7 @@ IssueRouter.delete(
   `/:uuid(${regexPatterns.uuid})`,
   validator(issueDeleteSchema),
   asyncRoute(async (req, res) => {
-    const result = await Issue.destroy({
+    const result = await models.issue.destroy({
       where: { uuid: req.params.uuid },
       force: true,
     });

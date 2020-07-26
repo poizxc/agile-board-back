@@ -1,8 +1,10 @@
 const checkIfIssueCantBeUpdated = (previousStatus, nextStatus) => {
-  if (previousStatus === 'PENDING' && nextStatus === 'TODO') {
-    return true;
-  }
-  if (previousStatus === 'CLOSED' && nextStatus !== 'CLOSED') {
+  const isPendingGoingBack =
+    previousStatus === 'PENDING' && nextStatus === 'TODO';
+  const isClosedGoingBack =
+    previousStatus === 'CLOSED' && nextStatus !== 'CLOSED';
+
+  if (isPendingGoingBack || isClosedGoingBack) {
     return true;
   }
   return false;
