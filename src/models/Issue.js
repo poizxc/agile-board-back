@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 const constants = require('../config/constants');
 const { checkIfIssueCanBeUpdated } = require('../utils');
 const { errors } = require('../helpers/Errors');
-const { isDev } = require('../config/config');
 const populateWithDummyData = require('../helpers/dummyData');
 
 const Issue = (db) => {
@@ -59,6 +58,6 @@ const Issue = (db) => {
       schema: 'public',
     },
   );
-  db.sync({ force: isDev }).then(() => populateWithDummyData(model));
+  db.sync({ force: true }).then(() => populateWithDummyData(model));
 };
 module.exports = Issue;
